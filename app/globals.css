@@ -1,17 +1,26 @@
 @import "tailwindcss";
 
+/* ================================
+   Brand Design Tokens
+   ================================ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand colors */
+  --rc-green: #39B44A;   /* Primary CTA */
+  --rc-ink: #010B07;     /* Dark Green/Black */
+  --rc-deep: #052D1B;    /* Deep Green */
+  --rc-paper: #FBFCFD;   /* White */
+
+  /* Default background/text */
+  --background: var(--rc-paper);
+  --foreground: var(--rc-ink);
+
+  /* Fonts */
+  --font-sans: 'Axiforma', system-ui, sans-serif;
+  --font-heading: 'Clash Display', 'Axiforma', sans-serif;
+  --font-accent: 'Ancorli Regular', 'Axiforma', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* (Optional dark mode tokens if you want to support it later) */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,8 +28,102 @@
   }
 }
 
+/* ================================
+   Base Styles
+   ================================ */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ================================
+   Utility Overrides
+   ================================ */
+
+/* Brand button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem; /* rounded-xl */
+  padding-left: 1.25rem;  /* px-5 */
+  padding-right: 1.25rem; /* px-5 */
+  padding-top: 0.75rem;   /* py-3 */
+  padding-bottom: 0.75rem;/* py-3 */
+  font-weight: 600;       /* font-semibold */
+  background-color: var(--rc-green);
+  color: #fff;
+  box-shadow: 0 1px 2px 0 rgb(16 24 40 / 5%), 0 1px 3px 0 rgb(16 24 40 / 10%); /* shadow */
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+/* Headings use secondary font (Clash Display if available) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+/* globals.css or app/globals.css */
+
+/* Background zoom */
+@keyframes zoom {
+  0% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Slide-in from left */
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide-up */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-zoom {
+  animation: zoom 6s ease-in-out forwards;
+}
+
+.animate-fadeInLeft {
+  animation: fadeInLeft 1s ease forwards;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 1s ease forwards;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  animation: marquee 25s linear infinite;
 }
