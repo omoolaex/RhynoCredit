@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { FaFileAlt, FaFileSignature, FaCheckCircle, FaMoneyBillWave } from 'react-icons/fa'
+import { motion } from 'framer-motion'
 
 export default function OurProcess() {
   const steps = [
@@ -27,12 +28,23 @@ export default function OurProcess() {
     },
   ]
 
+  const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0 },
+  }
+
   return (
     <section className="relative py-16 sm:py-20 bg-[#FBFCFD] text-black overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 space-y-12">
         {/* Top row: Intro + Video */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeUp}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
             <span className="inline-block border border-black rounded-full px-4 py-1 text-xs sm:text-sm font-medium uppercase mb-4 tracking-wide">
               🤝 Our Process
             </span>
@@ -44,10 +56,16 @@ export default function OurProcess() {
               guide you seamlessly from the first conversation to loan approval and disbursement.
               Every step is clear, supportive, and centered on you.
             </p>
-          </div>
+          </motion.div>
 
           {/* Video */}
-          <div className="relative w-full h-56 sm:h-72 lg:h-80 rounded-lg overflow-hidden shadow-lg">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="relative w-full h-56 sm:h-72 lg:h-80 rounded-lg overflow-hidden shadow-lg"
+          >
             <Image
               src="/images/process-video-thumb.jpg"
               alt="Loan process video"
@@ -60,30 +78,48 @@ export default function OurProcess() {
               rel="noopener noreferrer"
               className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition"
             >
-              <div className="w-16 h-16 flex items-center justify-center rounded-full bg-[#00A859] text-white text-3xl">
+              <motion.div
+                animate={{ scale: [1, 1.15, 1] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+                className="w-16 h-16 flex items-center justify-center rounded-full bg-[#00A859] text-white text-3xl"
+              >
                 ▶
-              </div>
+              </motion.div>
             </a>
-          </div>
+          </motion.div>
         </div>
 
         {/* Bottom row */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] gap-10 items-start">
           {/* Supporting image */}
-          <div className="relative w-full h-48 sm:h-92 rounded-lg overflow-hidden shadow-lg">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="relative w-full h-48 sm:h-92 rounded-lg overflow-hidden shadow-lg"
+          >
             <Image
               src="/images/process-image.jpg"
               alt="Loan process"
               fill
               className="object-cover"
             />
-          </div>
+          </motion.div>
 
           {/* Steps */}
           <div className="relative">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 py-8">
               {steps.map((step, idx) => (
-                <div key={idx} className="relative flex flex-col items-start text-left">
+                <motion.div
+                  key={idx}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  transition={{ duration: 0.6, delay: idx * 0.2 }}
+                  viewport={{ once: true }}
+                  className="relative flex flex-col items-start text-left"
+                >
                   {/* Icon */}
                   <div className="bg-[#052D1B] p-4 rounded-full shadow-md mb-4">
                     {step.icon}
@@ -94,10 +130,7 @@ export default function OurProcess() {
 
                   {/* Dot + line */}
                   <div className="relative flex items-center w-full mb-6">
-                    {/* Dot */}
                     <span className="w-4 h-4 rounded-full bg-[#00A859] z-10"></span>
-
-                    {/* Line (extends until next step, hidden on last) */}
                     {idx !== steps.length && (
                       <span className="flex-auto h-px bg-[#00A859]/40"></span>
                     )}
@@ -105,7 +138,7 @@ export default function OurProcess() {
 
                   {/* Description */}
                   <p className="text-sm text-gray-600 max-w-xs">{step.desc}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>

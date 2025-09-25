@@ -8,7 +8,7 @@ export default function PageHero({ title }) {
   const pathname = usePathname()
   const segments = pathname.split('/').filter(Boolean)
 
-  const backgroundImage = '/images/hero-default.png'
+  const backgroundImage = '/images/hero-default.jpg'
   const isHome = pathname === '/'
 
   return (
@@ -23,7 +23,7 @@ export default function PageHero({ title }) {
           alt={title}
           fill
           priority
-          className="object-cover"
+          className="object-cover-center"
           sizes="100vw"
         />
         {/* Gradient Overlay */}

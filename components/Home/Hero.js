@@ -5,9 +5,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaMoneyBillWave, FaArrowRight } from 'react-icons/fa'
 
+// Replace with authentic Nigerian imagery
 const slides = [
   {
-    image: '/banner1.png',
+    image: '/nigeria-techhub.png',
     title: 'Elevate Your Financial Future with Rhyno Credit',
     subtitle:
       'We provide flexible SME financing and tailored solutions to fuel your business growth.',
@@ -19,7 +20,31 @@ const slides = [
     },
   },
   {
-    image: '/banner2.png',
+    image: '/nigeria-market.jpg',
+    title: 'Your Partner in Business Growth & Success',
+    subtitle:
+      'Expert financial strategies and business advice tailored for SMEs across Nigeria.',
+    cta: { label: 'Get Started', href: '/services' },
+    box: {
+      icon: <FaMoneyBillWave className="text-4xl text-[#39B44A]" />,
+      heading: 'Fast Approval',
+      text: 'Quick, transparent processes to help you focus on what matters — growing your business.',
+    },
+  },
+  {
+    image: '/nigeria-officeworker.jpg',
+    title: 'Elevate Your Financial Future with Rhyno Credit',
+    subtitle:
+      'We provide flexible SME financing and tailored solutions to fuel your business growth.',
+    cta: { label: 'Contact Us', href: '/contact' },
+    box: {
+      icon: <FaMoneyBillWave className="text-4xl text-[#39B44A]" />,
+      heading: '5% Interest',
+      text: 'Discover our dependable loan solutions designed to empower your financial journey.',
+    },
+  },
+  {
+    image: '/nigeria-artisan.jpg',
     title: 'Your Partner in Business Growth & Success',
     subtitle:
       'Expert financial strategies and business advice tailored for SMEs across Nigeria.',
@@ -61,14 +86,16 @@ export default function Hero() {
               idx === current ? 'animate-zoom' : ''
             }`}
           />
+          {/* Subtle Nigerian texture overlay */}
+          <div className="absolute inset-0 bg-[url('/pattern-adire.png')] opacity-10 mix-blend-overlay" />
         </div>
       ))}
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent z-20" />
+      {/* Animated gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent z-20 animate-gradient" />
 
       {/* Overlay Text */}
-      <div className="relative z-30 max-w-7xl mx-auto h-full flex items-center px-8 pt-50 pb-50 sm:px-6 lg:px-8">
+      <div className="relative z-30 max-w-7xl mx-auto h-full flex items-center px-8 sm:px-6 lg:px-8">
         <div className="max-w-2xl text-white">
           <h1
             key={`title-${current}`}
@@ -82,17 +109,16 @@ export default function Hero() {
           >
             {slides[current].subtitle}
           </p>
-        <Link
-        key={`cta-${current}`}
-        href={slides[current].cta.href}
-        className="group relative overflow-hidden border border-white rounded-full mt-6 inline-flex items-center gap-2 px-6 py-3 text-base sm:text-lg text-white font-medium transition-colors duration-300"
-        >
-        <span className="relative z-10">{slides[current].cta.label}</span>
-        <FaArrowRight className="relative z-10 text-sm transition-transform duration-300 group-hover:translate-x-1" />
-
-        {/* Animated hover background */}
-        <span className="absolute inset-0 bg-[#39B44A] translate-x-full -translate-y-full group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500 ease-out"></span>
-        </Link>
+          <Link
+            key={`cta-${current}`}
+            href={slides[current].cta.href}
+            className="group relative overflow-hidden border border-white rounded-full mt-6 inline-flex items-center gap-2 px-6 py-3 text-base sm:text-lg text-white font-medium transition-all duration-300"
+          >
+            <span className="relative z-10">{slides[current].cta.label}</span>
+            <FaArrowRight className="relative z-10 text-sm transition-transform duration-300 group-hover:translate-x-1" />
+            {/* Animated hover background */}
+            <span className="absolute inset-0 bg-[#39B44A] translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+          </Link>
         </div>
       </div>
 

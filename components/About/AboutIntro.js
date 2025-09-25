@@ -87,7 +87,7 @@ export default function AboutIntro() {
             {/* Tall left image: spans full height */}
             <div className="relative col-span-1 h-full rounded-2xl overflow-hidden">
               <Image
-                src="/images/about-1.jpg"
+                src="/images/aboutintro.jpg"
                 alt="About RhynoCredit"
                 fill
                 className="object-cover"
@@ -100,7 +100,7 @@ export default function AboutIntro() {
               {/* Top image (taller) */}
               <div className="relative w-full h-full rounded-2xl overflow-hidden">
                 <Image
-                  src="/images/about-2.jpg"
+                  src="/images/about.jpg"
                   alt="RhynoCredit team"
                   fill
                   className="object-cover"

@@ -57,7 +57,7 @@ export default function WhyInvest() {
           {/* ---------- RIGHT COLUMN (Image) ---------- */}
           <div className="order-1 lg:order-2 relative w-full h-64 sm:h-80 lg:h-[480px] rounded-2xl overflow-hidden shadow-md">
             <Image
-              src="/images/why-invest.jpg" // 👉 Replace with actual professional business image
+              src="/images/why-invest.avif" // 👉 Replace with actual professional business image
               alt="Why Invest With RhynoCredit"
               fill
               className="object-cover"

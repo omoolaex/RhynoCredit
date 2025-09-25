@@ -39,7 +39,7 @@ export default function WhatMakesUsDifferent() {
         {/* -------- LEFT COLUMN (Image) -------- */}
         <div className="relative w-full h-64 sm:h-80 lg:h-auto">
           <Image
-            src="/images/about-1.jpg" // replace with actual image
+            src="/images/about.jpg" // replace with actual image
             alt="What Makes Us Different"
             fill
             className="object-cover rounded-3xl pl-4"

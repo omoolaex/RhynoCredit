@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 export default function Testimonials() {
   const testimonials = [
@@ -46,9 +47,7 @@ export default function Testimonials() {
     autoplayRef.current = setInterval(() => {
       setIndex((i) => (i + 1) % total)
     }, 6000)
-    return () => {
-      if (autoplayRef.current) clearInterval(autoplayRef.current)
-    }
+    return () => clearInterval(autoplayRef.current)
   }, [total])
 
   const goPrev = () => setIndex((i) => (i - 1 + total) % total)
@@ -65,11 +64,23 @@ export default function Testimonials() {
     setSlideHeight(maxHeight)
   }, [])
 
+  const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0 },
+  }
+
   return (
     <section className="relative py-12 sm:py-16 bg-[#052D1B] text-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_3fr] gap-10 items-start">
+        
         {/* Left: Video placeholder */}
-        <div className="w-full h-64 sm:h-80 lg:h-[500px] relative rounded-xl overflow-hidden shadow-lg">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="w-full h-64 sm:h-80 lg:h-[500px] relative rounded-xl overflow-hidden shadow-lg"
+        >
           <Image
             src="/images/testimonial-video-thumb.jpg"
             alt="Rhyno Credit customer stories"
@@ -83,16 +94,27 @@ export default function Testimonials() {
             rel="noopener noreferrer"
             className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/50 transition"
           >
-            <div className="w-16 h-16 flex items-center justify-center rounded-full bg-[#00A859] text-white text-3xl">
+            <motion.div
+              animate={{ scale: [1, 1.15, 1] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+              className="w-16 h-16 flex items-center justify-center rounded-full bg-[#00A859] text-white text-3xl"
+            >
               ▶
-            </div>
+            </motion.div>
           </a>
-        </div>
+        </motion.div>
 
         {/* Right: Heading + Slider */}
         <div>
           {/* Heading */}
-          <div className="mb-8 text-left">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeUp}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mb-8 text-left"
+          >
             <span className="inline-block border border-white/30 rounded-full px-3 py-1 text-xs sm:text-sm font-medium uppercase mb-3 tracking-wide">
               🤝 Success Story
             </span>
@@ -103,7 +125,7 @@ export default function Testimonials() {
               From Lagos to Kano, clients trust Rhyno Credit for quick, transparent loans that fuel
               growth, education, and stability. These are their voices.
             </p>
-          </div>
+          </motion.div>
 
           {/* Slider */}
           <div className="relative w-full overflow-hidden" ref={containerRef}>
@@ -112,7 +134,7 @@ export default function Testimonials() {
               style={{
                 width: `${total * 100}%`,
                 transform: `translateX(-${index * 100}%)`,
-                height: slideHeight ? `${slideHeight}px` : 'auto', // ✅ consistent height
+                height: slideHeight ? `${slideHeight}px` : 'auto',
               }}
             >
               {testimonials.map((t, i) => (
@@ -121,7 +143,13 @@ export default function Testimonials() {
                   className="w-full flex-shrink-0 px-0 sm:px-2"
                   style={{ flex: '0 0 100%' }}
                 >
-                  <article className="relative max-w-3xl">
+                  <motion.article
+                    key={i}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: i === index ? 1 : 0.2, x: i === index ? 0 : 50 }}
+                    transition={{ duration: 0.6 }}
+                    className="relative max-w-3xl"
+                  >
                     {/* Testimonial text */}
                     <p className="text-gray-100 text-base sm:text-lg leading-relaxed mb-4">
                       {t.text}
@@ -149,7 +177,7 @@ export default function Testimonials() {
                         “
                       </span>
                     </div>
-                  </article>
+                  </motion.article>
                 </li>
               ))}
             </ul>
@@ -157,24 +185,28 @@ export default function Testimonials() {
             {/* Controls + Dots */}
             <div className="mt-6 flex items-center justify-between">
               <div className="flex gap-2">
-                <button
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
                   onClick={goPrev}
                   className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition"
                 >
                   ‹
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
                   onClick={goNext}
                   className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition"
                 >
                   ›
-                </button>
+                </motion.button>
               </div>
 
               <div className="flex gap-2 ml-4">
                 {testimonials.map((_, i) => (
-                  <span
+                  <motion.span
                     key={i}
+                    animate={{ scale: i === index ? 1.2 : 1 }}
+                    transition={{ duration: 0.3 }}
                     className={`w-3 h-3 rounded-full ${
                       i === index ? 'bg-white' : 'bg-white/30'
                     }`}

@@ -12,7 +12,7 @@ export default function OurStory() {
           {/* ---------- LEFT COLUMN (Image) ---------- */}
           <div className="relative w-full h-64 sm:h-80 lg:h-[420px] rounded-2xl overflow-hidden">
             <Image
-              src="/images/our-story.jpg" // Replace with actual image path
+              src="/images/Our-story.avif" // Replace with actual image path
               alt="Our Story - RhynoCredit"
               fill
               className="object-cover"
